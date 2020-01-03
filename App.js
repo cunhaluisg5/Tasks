@@ -1,9 +1,9 @@
 console.disableYellowBox = true;
 
 import React from 'react';
-import Agenda from './src/screens/Agenda';
+import Navigator from './src/Navigator';
 
 const App = prop => (
-  <Agenda/>
+  <Navigator/>
 );
 export default App;
