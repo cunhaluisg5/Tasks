@@ -1,19 +1,19 @@
-import React from 'react';
-import {
+import React from 'react'
+import { 
     StyleSheet,
     Text,
     View,
     TouchableWithoutFeedback,
     TouchableOpacity
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import moment from 'moment';
-import 'moment/locale/pt-br';
-import commonStyles from '../commonStyles';
-import Swipeable from 'react-native-swipeable';
+} from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import moment from 'moment'
+import 'moment/locale/pt-br'
+import commonStyles from '../commonStyles'
+import Swipeable from 'react-native-swipeable'
 
 export default props => {
-    let check = null;
+    let check = null
     if (props.doneAt !== null) {
         check = (
             <View style={styles.done}>
@@ -28,9 +28,10 @@ export default props => {
     const descStyle = props.doneAt !== null ?
         { textDecorationLine: 'line-through' } : {}
 
+
     const leftContent = (
         <View style={styles.exclude}>
-            <Icon name='trash' size={20} color={'#FFF'} />
+            <Icon name='trash' size={20} color='#FFF' />
             <Text style={styles.excludeText}>Excluir</Text>
         </View>
     )
@@ -69,19 +70,19 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         flexDirection: 'row',
         borderBottomWidth: 1,
-        borderColor: '#AAA'
+        borderColor: '#AAA',
     },
     checkContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: '20%'
+        width: '20%',
     },
     pending: {
         borderWidth: 1,
         height: 25,
         width: 25,
         borderRadius: 15,
-        borderColor: '#555'
+        borderColor: '#555',
     },
     done: {
         height: 25,
@@ -89,26 +90,26 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: '#4D7031',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     description: {
         color: commonStyles.colors.mainText,
-        fontSize: 15
+        fontSize: 15,
     },
     date: {
         color: commonStyles.colors.subText,
-        fontSize: 12
+        fontSize: 12,
     },
     exclude: {
         flex: 1,
         backgroundColor: 'red',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     excludeText: {
         color: '#FFF',
         fontSize: 20,
-        margin: 10
+        margin: 10,
     }
 })

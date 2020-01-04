@@ -7,6 +7,6 @@ export default {
         month: '#1631be',
         secondary: '#FFF',
         mainText: '#222',
-        subText: '#555'
+        subText: '#555',
     }
 }

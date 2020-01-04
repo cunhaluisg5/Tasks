@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
     StyleSheet,
     Text,
@@ -6,27 +6,29 @@ import {
     ImageBackground,
     FlatList,
     TouchableOpacity,
-} from 'react-native';
-import axios from 'axios';
-import { server, showError } from '../common';
-import moment from 'moment';
-import 'moment/locale/pt-br';
-import commonStyles from '../commonStyles';
-import Task from '../components/Task';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import ActionButton from 'react-native-action-button';
-import AddTask from './AddTask';
-import todayImage from '../../assets/imgs/today.jpg';
-import tomorrowImage from '../../assets/imgs/tomorrow.jpg';
-import weekImage from '../../assets/imgs/week.jpg';
-import monthImage from '../../assets/imgs/month.jpg';
+    Platform
+} from 'react-native'
+import axios from 'axios'
+import moment from 'moment'
+import 'moment/locale/pt-br'
+import commonStyles from '../commonStyles'
+import Task from '../components/Task'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import ActionButton from 'react-native-action-button'
+import AddTask from './AddTask'
+import { server, showError } from '../common'
+
+import todayImage from '../../assets/imgs/today.jpg'
+import tomorrowImage from '../../assets/imgs/tomorrow.jpg'
+import weekImage from '../../assets/imgs/week.jpg'
+import monthImage from '../../assets/imgs/month.jpg'
 
 export default class Agenda extends Component {
     state = {
         tasks: [],
         visibleTasks: [],
         showDoneTasks: true,
-        showAddTask: false
+        showAddTask: false,
     }
 
     addTask = async task => {
@@ -55,7 +57,7 @@ export default class Agenda extends Component {
         let visibleTasks = null
         if (this.state.showDoneTasks) {
             visibleTasks = [...this.state.tasks]
-        }else {
+        } else {
             const pending = task => task.doneAt === null
             visibleTasks = this.state.tasks.filter(pending)
         }
@@ -134,8 +136,7 @@ export default class Agenda extends Component {
                     <View style={styles.titleBar}>
                         <Text style={styles.title}>{this.props.title}</Text>
                         <Text style={styles.subtitle}>
-                            {moment().locale('pt-br')
-                                .format('ddd, D [de] MMMM')}
+                            {moment().locale('pt-br').format('ddd, D [de] MMMM')}
                         </Text>
                     </View>
                 </ImageBackground>
@@ -148,41 +149,41 @@ export default class Agenda extends Component {
                 </View>
                 <ActionButton buttonColor={styleColor}
                     onPress={() => { this.setState({ showAddTask: true }) }} />
-            </View>
+            </View >
         )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     background: {
-        flex: 3
+        flex: 3,
     },
     titleBar: {
         flex: 1,
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
     title: {
         color: commonStyles.colors.secondary,
         fontSize: 50,
         marginLeft: 20,
-        marginBottom: 10
+        marginBottom: 10,
     },
     subtitle: {
         color: commonStyles.colors.secondary,
         fontSize: 20,
         marginLeft: 20,
-        marginBottom: 30
+        marginBottom: 30,
     },
     taksContainer: {
-        flex: 7
+        flex: 7,
     },
     iconBar: {
-        marginTop: 30,
+        marginTop: Platform.OS === 'ios' ? 30 : 10,
         marginHorizontal: 20,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     }
 })

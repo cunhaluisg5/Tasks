@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 import {
     createSwitchNavigator,
     createDrawerNavigator
-} from 'react-navigation';
-import Menu from './screens/Menu';
-import Agenda from './screens/Agenda';
-import Auth from './screens/Auth';
-import AuthOrApp from './screens/AuthOrApp';
+} from 'react-navigation'
+import AuthOrApp from './screens/AuthOrApp'
+import Menu from './screens/Menu'
+import Agenda from './screens/Agenda'
+import Auth from './screens/Auth'
 
 const MenuRoutes = {
     Today: {
         name: 'Today',
-        screen: props =>
+        screen: props => 
             <Agenda title='Hoje' daysAhead={0} {...props} />,
         navigationOptions: {
             title: 'Hoje'
@@ -27,7 +27,7 @@ const MenuRoutes = {
     },
     Week: {
         name: 'Week',
-        screen: props =>
+        screen: props => 
             <Agenda title='Semana' daysAhead={7} {...props} />,
         navigationOptions: {
             title: 'Semana'
@@ -35,7 +35,7 @@ const MenuRoutes = {
     },
     Month: {
         name: 'Month',
-        screen: props =>
+        screen: props => 
             <Agenda title='Mês' daysAhead={30} {...props} />,
         navigationOptions: {
             title: 'Mês'
@@ -52,7 +52,7 @@ const MenuConfig = {
             fontSize: 20
         },
         activeLabelStyle: {
-            color: '#080'
+            color: '#080',
         }
     }
 }
@@ -77,5 +77,4 @@ const MainRoutes = {
 const MainNavigator = createSwitchNavigator(MainRoutes, {
     initialRouteName: 'Loading'
 })
-
 export default MainNavigator

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
     StyleSheet,
     Text,
@@ -7,11 +7,11 @@ import {
     TouchableOpacity,
     Alert,
     AsyncStorage
-} from 'react-native';
-import axios from 'axios';
-import { server, showError } from '../common';
-import AuthInput from '../components/AuthInput';
-import backgroundImage from '../../assets/imgs/login.jpg';
+} from 'react-native'
+import axios from 'axios'
+import { server, showError } from '../common'
+import AuthInput from '../components/AuthInput'
+import backgroundImage from '../../assets/imgs/login.jpg'
 
 export default class Auth extends Component {
     state = {
@@ -19,7 +19,7 @@ export default class Auth extends Component {
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
     }
 
     signin = async () => {
@@ -35,10 +35,11 @@ export default class Auth extends Component {
             this.props.navigation.navigate('Home', res.data)
         } catch (err) {
             Alert.alert('Erro', 'Falha no Login!')
+            // showError(err)
         }
     }
 
-    signup = async () => { 
+    signup = async () => {
         try {
             await axios.post(`${server}/signup`, {
                 name: this.state.name,
@@ -46,10 +47,10 @@ export default class Auth extends Component {
                 password: this.state.password,
                 confirmPassword: this.state.confirmPassword
             })
+
             Alert.alert('Sucesso!', 'Usuário cadastrado :)')
             this.setState({ stageNew: false })
         } catch (err) {
-            console.log('O erro é: ', err)
             showError(err)
         }
     }
@@ -67,60 +68,65 @@ export default class Auth extends Component {
 
         validations.push(this.state.email && this.state.email.includes('@'))
         validations.push(this.state.password && this.state.password.length >= 6)
-        
+
         if(this.state.stageNew) {
-            validations.push(this,state.name && this.state.name.trim())
+            validations.push(this.state.name && this.state.name.trim())
             validations.push(this.state.confirmPassword)
             validations.push(this.state.password === this.state.confirmPassword)
         }
 
-        const validForm = validations.reduce((all, v) => all & v)
+        const validForm = validations.reduce((all, v) => all && v)
 
         return (
-            <ImageBackground source={backgroundImage}
+            <ImageBackground source={backgroundImage} 
                 style={styles.background}>
                 <Text style={styles.title}>Tasks</Text>
                 <View style={styles.formContainer}>
                     <Text style={styles.subtitle}>
-                        {this.state.stageNew ?
+                        {this.state.stageNew ? 
                             'Crie a sua conta' : 'Informe seus dados'}
                     </Text>
                     {this.state.stageNew &&
-                        <AuthInput icon='user' placeholder='Nome' style={styles.input}
+                        <AuthInput icon='user' placeholder='Nome'
+                            style={styles.input}
                             value={this.state.name}
-                            onChangeText={name => this.setState({ name })}/>}
-                    <AuthInput icon='at' placeholder='E-mail' style={styles.input}
+                            onChangeText={name => 
+                                this.setState({ name })} />}
+                    <AuthInput icon='at' placeholder='E-mail'
+                        style={styles.input}
                         value={this.state.email}
-                        onChangeText={email => this.setState({ email })} />
-                    <AuthInput icon='lock' secureTextEntry={true} 
-                        placeholder='Senha' style={styles.input}
+                        onChangeText={email => 
+                            this.setState({ email })} />
+                    <AuthInput icon='lock' secureTextEntry={true}
+                        placeholder='Senha'
+                        style={styles.input}
                         value={this.state.password}
-                        onChangeText={password => this.setState({ password })}/>
+                        onChangeText={password => 
+                            this.setState({ password })} />
                     {this.state.stageNew &&
-                        <AuthInput icon='asterisk' secureTextEntry={true} 
-                            placeholder='Confirmação'
-                            style={styles.input} value={this.state.confirmPassword}
-                            onChangeText={confirmPassword => this.setState({ confirmPassword })}/>}
+                        <AuthInput icon='asterisk'
+                            secureTextEntry={true} placeholder='Confirmação'
+                            style={styles.input}
+                            value={this.state.confirmPassword}
+                            onChangeText={confirmPassword => 
+                            this.setState({ confirmPassword })} />}
                     <TouchableOpacity disabled={!validForm}
                         onPress={this.signinOrSignup}>
                         <View style={[styles.button, !validForm ? { backgroundColor: '#AAA' } : {}]}>
                             <Text style={styles.buttonText}>
-                                {this.state.stageNew ? 'Registrar' : 'Entrar'}
-                            </Text>
+                                {this.state.stageNew ? 'Registrar' : 'Entrar'}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={{ padding: 10 }}
-                    onPress={() => this.setState({
+                    onPress={() => this.setState({ 
                         stageNew: !this.state.stageNew
                     })}>
                     <Text style={styles.buttonText}>
-                        {this.state.stageNew ? 'Já possui conta?'
-                            : 'Ainda não possui conta?'}
-                    </Text>
+                        {this.state.stageNew ? 'Já possui conta?' 
+                            : 'Ainda não possui conta?'}</Text>
                 </TouchableOpacity>
             </ImageBackground>
-
         )
     }
 }
@@ -130,31 +136,31 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     title: {
         color: '#FFF',
         fontSize: 70,
-        marginBottom: 10
+        marginBottom: 10,
     },
     subtitle: {
         color: '#FFF',
-        fontSize: 20
+        fontSize: 20,
     },
     formContainer: {
         backgroundColor: 'rgba(0,0,0,0.8)',
         padding: 20,
-        width: '90%'
+        width: '90%',
     },
     input: {
         marginTop: 10,
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFF',
     },
     button: {
         backgroundColor: '#080',
         marginTop: 10,
         padding: 10,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     buttonText: {
         color: '#FFF',
