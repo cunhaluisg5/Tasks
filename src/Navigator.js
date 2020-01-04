@@ -6,6 +6,7 @@ import {
 import Menu from './screens/Menu';
 import Agenda from './screens/Agenda';
 import Auth from './screens/Auth';
+import AuthOrApp from './screens/AuthOrApp';
 
 const MenuRoutes = {
     Today: {
@@ -59,6 +60,10 @@ const MenuConfig = {
 const MenuNavigator = createDrawerNavigator(MenuRoutes, MenuConfig)
 
 const MainRoutes = {
+    Loading: {
+        name: 'Loading',
+        screen: AuthOrApp
+    },
     Auth: {
         name: 'Auth',
         screen: Auth
@@ -70,7 +75,7 @@ const MainRoutes = {
 }
 
 const MainNavigator = createSwitchNavigator(MainRoutes, {
-    initialRouteName: 'Auth'
+    initialRouteName: 'Loading'
 })
 
 export default MainNavigator
